@@ -1,14 +1,41 @@
+"use client";
 
-const monthlyData = [
-  { month: "Jan", income: 45000, expenses: 25000 },
-  { month: "Feb", income: 55000, expenses: 30000 },
-  { month: "Mar", income: 48000, expenses: 28000 },
-  { month: "Apr", income: 65000, expenses: 35000 },
-  { month: "May", income: 70000, expenses: 40000 },
-  { month: "Jun", income: 85000, expenses: 45000 },
-];
+import { useFinance } from "../../context/FinanceContext";
 
 export default function CashflowCards() {
+  const { transactions } = useFinance();
+
+  const currentYear = new Date().getFullYear();
+
+  const monthlyData = Array.from({ length: 12 }, (_, index) => {
+    const monthTransactions = transactions.filter((item) => {
+      if (!item.date) return false;
+
+      const date = new Date(`${item.date}T00:00:00`);
+
+      return (
+        date.getFullYear() === currentYear &&
+        date.getMonth() === index
+      );
+    });
+
+    const income = monthTransactions
+      .filter((item) => item.type === "income")
+      .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+    const expenses = monthTransactions
+      .filter((item) => item.type === "expense")
+      .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+    return {
+      month: new Date(currentYear, index).toLocaleString("en-IN", {
+        month: "short",
+      }),
+      income,
+      expenses,
+    };
+  });
+
   const totalIncome = monthlyData.reduce(
     (sum, item) => sum + item.income,
     0
@@ -22,7 +49,10 @@ export default function CashflowCards() {
   const netCashflow = totalIncome - totalExpenses;
 
   const maxValue = Math.max(
-    ...monthlyData.map((item) => Math.max(item.income, item.expenses))
+    1,
+    ...monthlyData.map((item) =>
+      Math.max(item.income, item.expenses)
+    )
   );
 
   return (
@@ -32,11 +62,10 @@ export default function CashflowCards() {
           Cash Flow Overview
         </h2>
         <p className="mt-1 text-sm text-slate-500">
-          Monthly income and expenses overview
+          Monthly income and expenses overview for {currentYear}
         </p>
       </div>
 
-      {/* Financial Summary */}
       <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div className="rounded-xl bg-green-50 p-4">
           <p className="text-sm text-green-700">Total Income</p>
@@ -60,7 +89,6 @@ export default function CashflowCards() {
         </div>
       </div>
 
-      {/* Monthly Bar Visualization */}
       <div>
         <h3 className="mb-5 font-medium text-slate-700">
           Monthly Comparison
@@ -78,6 +106,7 @@ export default function CashflowCards() {
                   <span className="w-16 text-xs text-slate-500">
                     Income
                   </span>
+
                   <div className="h-3 flex-1 rounded-full bg-slate-100">
                     <div
                       className="h-3 rounded-full bg-green-500"
@@ -92,6 +121,7 @@ export default function CashflowCards() {
                   <span className="w-16 text-xs text-slate-500">
                     Expense
                   </span>
+
                   <div className="h-3 flex-1 rounded-full bg-slate-100">
                     <div
                       className="h-3 rounded-full bg-red-400"
@@ -121,4 +151,3 @@ export default function CashflowCards() {
     </section>
   );
 }
-
