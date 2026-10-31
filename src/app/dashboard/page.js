@@ -1,10 +1,13 @@
-
+import Alerts from "../../components/dashboard/Alerts";
+import CashflowCards from "../../components/dashboard/CashflowCards";
 import SummaryCards from "../../components/dashboard/SummaryCards";
-
+import Navbar from "../../components/layout/Navbar";
 export default function DashboardPage() {
   return (
+    
     <main className="min-h-screen bg-[#f6f8fc] p-6">
       <div className="mx-auto max-w-7xl">
+        <Navbar />
 
         {/* Dashboard Heading */}
         <div className="mb-8">
@@ -19,6 +22,8 @@ export default function DashboardPage() {
 
         {/* Summary Cards */}
         <SummaryCards />
+        <CashflowCards />
+        <Alerts />
 
         {/* Recent Transactions */}
         <section className="mt-8 rounded-2xl border border-[#e8edf5] bg-white p-6 shadow-sm">
