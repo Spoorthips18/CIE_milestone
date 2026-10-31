@@ -1,36 +1,50 @@
 
-const summaryData = [
-  {
-    title: "Total Income",
-    amount: "₹1,50,000",
-    description: "Income received",
-    color: "text-green-600",
-    icon: "↑",
-  },
-  {
-    title: "Total Expenses",
-    amount: "₹65,000",
-    description: "Business expenses",
-    color: "text-red-500",
-    icon: "↓",
-  },
-  {
-    title: "Current Balance",
-    amount: "₹85,000",
-    description: "Available balance",
-    color: "text-blue-600",
-    icon: "₹",
-  },
-  {
-    title: "Pending Payments",
-    amount: "₹25,000",
-    description: "Awaiting collection",
-    color: "text-amber-600",
-    icon: "◷",
-  },
-];
+"use client";
+
+import { useFinance } from "../../context/FinanceContext";
 
 export default function SummaryCards() {
+  const {
+    totalIncome,
+    totalExpenses,
+    currentBalance,
+    pendingPayments,
+  } = useFinance();
+
+  const summaryData = [
+    {
+      title: "Total Income",
+      amount: totalIncome,
+      description: "Income received",
+      color: "text-green-600",
+      icon: "↑",
+    },
+    {
+      title: "Total Expenses",
+      amount: totalExpenses,
+      description: "Business expenses",
+      color: "text-red-500",
+      icon: "↓",
+    },
+    {
+      title: "Current Balance",
+      amount: currentBalance,
+      description: "Available balance",
+      color: "text-blue-600",
+      icon: "₹",
+    },
+    {
+      title: "Pending Payments",
+      amount: pendingPayments,
+      description: "Awaiting collection",
+      color: "text-amber-600",
+      icon: "◷",
+    },
+  ];
+
+  const formatAmount = (amount) =>
+    `₹${Number(amount).toLocaleString("en-IN")}`;
+
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {summaryData.map((item) => (
@@ -46,7 +60,7 @@ export default function SummaryCards() {
           </div>
 
           <h2 className="mt-3 text-2xl font-bold text-slate-800">
-            {item.amount}
+            {formatAmount(item.amount)}
           </h2>
 
           <p className={`mt-2 text-sm ${item.color}`}>
@@ -57,4 +71,3 @@ export default function SummaryCards() {
     </div>
   );
 }
-
