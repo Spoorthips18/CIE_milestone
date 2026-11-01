@@ -1,18 +1,27 @@
+
 "use client";
 
 import Navbar from "../../components/layout/Navbar";
+import TransactionForm from "../../components/forms/TransactionForm";
+import TransactionTable from "../../components/dashboard/TransactionTable";
 import { useFinance } from "../../context/FinanceContext";
 
 export default function TransactionsPage() {
-  const { transactions, deleteTransaction } = useFinance();
+  const {
+    transactions,
+    addTransaction,
+    deleteTransaction,
+    totalIncome,
+    totalExpenses,
+  } = useFinance();
 
-  const totalIncome = transactions
-    .filter((item) => item.type === "income")
-    .reduce((total, item) => total + Number(item.amount), 0);
-
-  const totalExpenses = transactions
-    .filter((item) => item.type === "expense")
-    .reduce((total, item) => total + Number(item.amount), 0);
+  const handleAddTransaction = (formData) => {
+    addTransaction({
+      ...formData,
+      amount: Number(formData.amount),
+      type: formData.type,
+    });
+  };
 
   return (
     <>
@@ -45,68 +54,39 @@ export default function TransactionsPage() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-xl bg-white shadow-sm">
-            <div className="border-b border-slate-200 p-6">
-              <h2 className="text-lg font-semibold text-slate-800">
-                All Transactions
-              </h2>
-            </div>
+          <div className="mb-8">
+            <TransactionForm onAddTransaction={handleAddTransaction} />
+      
+          </div>
 
-            {transactions.length === 0 ? (
-              <p className="p-8 text-center text-slate-500">
-                No transactions available yet.
-              </p>
-            ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
-                  <thead className="bg-slate-50 text-slate-500">
-                    <tr>
-                      <th className="p-4">Description</th>
-                      <th className="p-4">Date</th>
-                      <th className="p-4">Type</th>
-                      <th className="p-4">Amount</th>
-                      <th className="p-4">Action</th>
-                    </tr>
-                  </thead>
+          <div className="rounded-xl bg-white p-5 shadow-sm">
+            <h2 className="mb-5 text-lg font-semibold text-slate-800">
+              All Transactions
+            </h2>
 
-                  <tbody>
-                    {transactions.map((transaction) => (
-                      <tr
-                        key={transaction.id}
-                        className="border-t border-slate-100"
-                      >
-                        <td className="p-4 font-medium text-slate-700">
-                          {transaction.name}
-                        </td>
-                        <td className="p-4 text-slate-500">
-                          {transaction.date}
-                        </td>
-                        <td className="p-4">
-                          <span
-                            className={
-                              transaction.type === "income"
-                                ? "rounded-full bg-green-100 px-3 py-1 text-green-700"
-                                : "rounded-full bg-red-100 px-3 py-1 text-red-700"
-                            }
-                          >
-                            {transaction.type}
-                          </span>
-                        </td>
-                        <td className="p-4 font-semibold text-slate-700">
-                          ₹{Number(transaction.amount).toLocaleString("en-IN")}
-                        </td>
-                        <td className="p-4">
-                          <button
-                            onClick={() => deleteTransaction(transaction.id)}
-                            className="text-red-500 hover:text-red-700"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            <TransactionTable transactions={transactions} />
+
+            {transactions.length > 0 && (
+              <div className="mt-4 border-t pt-4">
+                <p className="mb-3 font-medium text-slate-700">
+                  Manage Transactions
+                </p>
+
+                {transactions.map((transaction) => (
+                  <div
+                    key={transaction.id}
+                    className="flex items-center justify-between border-b py-2"
+                  >
+                    <span>{transaction.name}</span>
+
+                    <button
+                      onClick={() => deleteTransaction(transaction.id)}
+                      className="text-sm text-red-500 hover:text-red-700"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
               </div>
             )}
           </div>

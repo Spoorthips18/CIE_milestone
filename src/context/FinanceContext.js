@@ -61,12 +61,12 @@ const [payments, setPayments] = useState(initialPayments);
 
   // Calculate total income
   const totalIncome = transactions
-    .filter((item) => item.type === "income")
+    .filter((item) => item.type === "Income")
     .reduce((total, item) => total + Number(item.amount || 0), 0);
 
   // Calculate total expenses
   const totalExpenses = transactions
-    .filter((item) => item.type === "expense")
+    .filter((item) => item.type === "Expense")
     .reduce((total, item) => total + Number(item.amount || 0), 0);
 
   // Calculate current balance

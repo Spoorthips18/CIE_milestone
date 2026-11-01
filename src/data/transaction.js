@@ -5,7 +5,7 @@ const transactions = [
     amount: 45000,
     category: "Salary",
     date: "2026-10-01",
-    type: "income",
+    type: "Income",
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const transactions = [
     amount: 2500,
     category: "Food",
     date: "2026-10-05",
-    type: "expense",
+    type: "Expense",
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const transactions = [
     amount: 8000,
     category: "Freelance",
     date: "2026-10-10",
-    type: "income",
+    type: "Income",
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const transactions = [
     amount: 1800,
     category: "Utilities",
     date: "2026-10-15",
-    type: "expense",
+    type: "Expense",
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ const transactions = [
     amount: 999,
     category: "Utilities",
     date: "2026-10-20",
-    type: "expense",
+    type: "Expense",
   },
 ];
 

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useFinance } from "../../context/FinanceContext";
@@ -20,11 +21,11 @@ export default function CashflowCards() {
     });
 
     const income = monthTransactions
-      .filter((item) => item.type === "income")
+      .filter((item) => item.type === "Income")
       .reduce((sum, item) => sum + Number(item.amount || 0), 0);
 
     const expenses = monthTransactions
-      .filter((item) => item.type === "expense")
+      .filter((item) => item.type === "Expense")
       .reduce((sum, item) => sum + Number(item.amount || 0), 0);
 
     return {
@@ -106,7 +107,6 @@ export default function CashflowCards() {
                   <span className="w-16 text-xs text-slate-500">
                     Income
                   </span>
-
                   <div className="h-3 flex-1 rounded-full bg-slate-100">
                     <div
                       className="h-3 rounded-full bg-green-500"
@@ -121,7 +121,6 @@ export default function CashflowCards() {
                   <span className="w-16 text-xs text-slate-500">
                     Expense
                   </span>
-
                   <div className="h-3 flex-1 rounded-full bg-slate-100">
                     <div
                       className="h-3 rounded-full bg-red-400"
@@ -141,7 +140,6 @@ export default function CashflowCards() {
             <span className="h-3 w-3 rounded-full bg-green-500" />
             Income
           </span>
-
           <span className="flex items-center gap-2 text-slate-600">
             <span className="h-3 w-3 rounded-full bg-red-400" />
             Expenses
