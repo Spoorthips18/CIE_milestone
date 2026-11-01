@@ -2,12 +2,14 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import initialTransactions from "../data/transaction";
+import initialPayments from "../data/payment";
 
 const FinanceContext = createContext();
 
 export function FinanceProvider({ children }) {
-  const [transactions, setTransactions] = useState([]);
-  const [payments, setPayments] = useState([]);
+ const [transactions, setTransactions] = useState(initialTransactions);
+const [payments, setPayments] = useState(initialPayments);
 
   // Add a new transaction
   const addTransaction = (newTransaction) => {
