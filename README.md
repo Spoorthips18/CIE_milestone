@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Cash Flow Management Dashboard
 
-First, run the development server:
+## About the Project
+The Cash Flow Management Dashboard is a web-based application designed to help users track income, expenses, transactions, and pending payments in one place.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Problem Statement
+Managing income, expenses, and pending payments manually can be difficult. This application provides a simple dashboard to organize financial information and monitor cash flow.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
+- Next.js
+- React.js
+- JavaScript
+- Tailwind CSS
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Main Features
+- Landing page
+- User Login and Registration interfaces
+- Dashboard with financial summary cards
+- Income and expense tracking
+- Transaction management
+- Payment tracking
+- Pending and overdue payment alerts
+- Responsive user interface
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
+- `src/app` – Application pages
+- `src/components` – Reusable UI components
+- `src/context` – Finance context and state management
+- `src/data` – Sample transaction and payment data
 
-## Learn More
+## How to Run the Project
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository.
+2. Open the project folder in VS Code.
+3. Install dependencies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Start the development server:
 
-## Deploy on Vercel
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Open http://localhost:3000 in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Team Contribution
+This project is developed collaboratively, with responsibilities divided between frontend UI development and dashboard functionality.
+
+## Project Status
+The application is under development.
